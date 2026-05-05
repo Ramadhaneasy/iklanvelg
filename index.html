@@ -3,547 +3,298 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RAYS TE37 - Legendary Performance</title>
-  <style>
-    :root {
-      --gold: #caa458;
-      --gold-soft: #e3c477;
-      --white: #f4f4f4;
-      --muted: rgba(255, 255, 255, 0.72);
-      --dark: #080808;
-      --panel: rgba(18, 18, 18, 0.72);
-      --red: #e20e0e;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 70% 48%, rgba(255,255,255,.10), transparent 22%),
-        linear-gradient(90deg, rgba(0,0,0,.95) 0%, rgba(0,0,0,.78) 48%, rgba(0,0,0,.90) 100%),
-        repeating-linear-gradient(90deg, #171717 0 2px, #222 2px 4px, #151515 4px 130px);
-      color: var(--white);
-      overflow-x: hidden;
-    }
-
-    .page {
-      width: min(100%, 980px);
-      min-height: 100vh;
-      margin: 0 auto;
-      position: relative;
-      padding: 62px 64px 42px;
-      isolation: isolate;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.35)),
-        radial-gradient(circle at 70% 62%, rgba(202,164,88,.15), transparent 26%);
-      box-shadow: 0 0 80px rgba(0,0,0,.8);
-    }
-
-    .page::before {
-      content: "忍\A者";
-      white-space: pre;
-      position: absolute;
-      right: 42px;
-      top: 52px;
-      z-index: -1;
-      color: rgba(255,255,255,.12);
-      font-size: clamp(9rem, 21vw, 16rem);
-      line-height: .85;
-      font-weight: 900;
-      font-family: Georgia, serif;
-      transform: rotate(-7deg);
-      filter: blur(.2px);
-    }
-
-    .page::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 100% 120px, 120px 100%;
-      opacity: .25;
-      mix-blend-mode: overlay;
-    }
-
-    .brand {
-      color: var(--gold-soft);
-      font-weight: 900;
-      letter-spacing: .06em;
-      font-style: italic;
-      font-size: 1.55rem;
-      margin-bottom: 24px;
-    }
-
-    .hero-title {
-      font-size: clamp(4.9rem, 14vw, 8.5rem);
-      line-height: .72;
-      letter-spacing: -.06em;
-      font-weight: 950;
-      font-style: italic;
-      text-transform: uppercase;
-      color: #e8e8e8;
-      text-shadow: 0 12px 35px rgba(0,0,0,.75);
-    }
-
-    .tagline {
-      margin-top: 26px;
-      color: var(--gold-soft);
-      font-size: clamp(1.45rem, 4vw, 2.05rem);
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: .02em;
-      text-transform: uppercase;
-    }
-
-    .red-line {
-      width: 104px;
-      height: 3px;
-      margin: 30px 0 24px;
-      background: var(--red);
-      border-radius: 999px;
-      box-shadow: 0 0 16px rgba(226,14,14,.55);
-    }
-
-    .intro {
-      max-width: 330px;
-      font-size: 1.35rem;
-      line-height: 1.22;
-      font-weight: 900;
-      text-shadow: 0 4px 20px #000;
-    }
-
-    .content {
-      display: grid;
-      grid-template-columns: 310px 1fr;
-      gap: 26px;
-      align-items: end;
-      margin-top: 44px;
-      position: relative;
-    }
-
-    .features {
-      display: grid;
-      gap: 26px;
-      z-index: 2;
-    }
-
-    .feature {
-      display: grid;
-      grid-template-columns: 76px 1fr;
-      gap: 18px;
-      align-items: center;
-    }
-
-    .icon {
-      width: 58px;
-      height: 58px;
-      border: 2px solid rgba(202,164,88,.82);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: var(--gold-soft);
-      font-size: 1.65rem;
-      background: rgba(0,0,0,.38);
-      box-shadow: inset 0 0 12px rgba(202,164,88,.12), 0 8px 28px rgba(0,0,0,.45);
-    }
-
-    .feature h3 {
-      font-size: 1.12rem;
-      line-height: 1.04;
-      text-transform: uppercase;
-      font-weight: 900;
-      margin-bottom: 9px;
-    }
-
-    .feature p {
-      color: var(--gold-soft);
-      font-size: .93rem;
-      line-height: 1.08;
-      font-weight: 800;
-      max-width: 190px;
-    }
-
-    .wheel-zone {
-      position: relative;
-      min-height: 480px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .wheel-shadow {
-      position: absolute;
-      bottom: 8px;
-      width: 82%;
-      height: 52px;
-      background: radial-gradient(ellipse, rgba(0,0,0,.75), transparent 70%);
-      filter: blur(8px);
-    }
-
-    .wheel {
-      width: min(410px, 92vw);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      position: relative;
-      background:
-        radial-gradient(circle at center, #111 0 10%, #777 10.5% 12%, #181818 12.5% 17%, transparent 17.5%),
-        radial-gradient(circle at center, transparent 0 46%, #101010 47%, #5d5a54 49%, #151515 52%, #8c8981 54%, #080808 57%, transparent 60%),
-        conic-gradient(from -18deg, #171717 0 20deg, #4b4741 20deg 28deg, #111 28deg 52deg, #4d4840 52deg 60deg, #171717 60deg 92deg, #4b4741 92deg 100deg, #111 100deg 124deg, #4d4840 124deg 132deg, #171717 132deg 164deg, #4b4741 164deg 172deg, #111 172deg 196deg, #4d4840 196deg 204deg, #171717 204deg 236deg, #4b4741 236deg 244deg, #111 244deg 268deg, #4d4840 268deg 276deg, #171717 276deg 308deg, #4b4741 308deg 316deg, #111 316deg 340deg, #4d4840 340deg 348deg, #171717 348deg 360deg);
-      box-shadow:
-        inset 0 0 0 9px #0b0b0b,
-        inset 0 0 0 13px #817d75,
-        inset 0 0 0 19px #191919,
-        inset 0 0 0 24px #514d47,
-        inset 0 0 70px rgba(0,0,0,.85),
-        0 36px 55px rgba(0,0,0,.75);
-      transform: rotate(-5deg);
-    }
-
-    .wheel::before {
-      content: "";
-      position: absolute;
-      inset: 21%;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at center, #0c0c0c 0 26%, #9d9991 26.5% 29%, #1c1b19 30% 36%, transparent 37%),
-        conic-gradient(from 12deg, transparent 0 18deg, rgba(210,204,190,.18) 18deg 24deg, transparent 24deg 72deg, rgba(210,204,190,.18) 72deg 78deg, transparent 78deg 132deg, rgba(210,204,190,.18) 132deg 138deg, transparent 138deg 192deg, rgba(210,204,190,.18) 192deg 198deg, transparent 198deg 252deg, rgba(210,204,190,.18) 252deg 258deg, transparent 258deg 312deg, rgba(210,204,190,.18) 312deg 318deg, transparent 318deg 360deg);
-      box-shadow: inset 0 0 28px #000;
-    }
-
-    .wheel::after {
-      content: "TE37\A VOLK RACING";
-      white-space: pre;
-      position: absolute;
-      right: 70px;
-      top: 190px;
-      color: rgba(255,255,255,.9);
-      font-weight: 900;
-      font-style: italic;
-      font-size: 1.36rem;
-      line-height: .8;
-      letter-spacing: -.02em;
-      text-shadow: 0 2px 6px #000;
-      transform: rotate(5deg);
-    }
-
-    .bolt {
-      width: 25px;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      background: radial-gradient(circle, #070707 0 43%, #807a70 47% 62%, #050505 66%);
-      transform: translate(-50%, -50%) rotate(var(--a)) translateY(-54px);
-    }
-
-    .bolt:nth-child(1) { --a: 0deg; }
-    .bolt:nth-child(2) { --a: 72deg; }
-    .bolt:nth-child(3) { --a: 144deg; }
-    .bolt:nth-child(4) { --a: 216deg; }
-    .bolt:nth-child(5) { --a: 288deg; }
-
-    .qr-card {
-      position: absolute;
-      right: -18px;
-      bottom: -22px;
-      width: 190px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 18px 42px rgba(0,0,0,.7);
-      overflow: hidden;
-      z-index: 3;
-    }
-
-    .qr {
-      width: 142px;
-      height: 142px;
-      margin: 22px auto 12px;
-      background:
-        linear-gradient(90deg, #000 10px, transparent 10px 18px, #000 18px 28px, transparent 28px 36px, #000 36px 46px, transparent 46px 56px, #000 56px 66px, transparent 66px 74px, #000 74px 84px, transparent 84px 94px, #000 94px 104px, transparent 104px 112px, #000 112px 122px, transparent 122px),
-        linear-gradient(#000 10px, transparent 10px 18px, #000 18px 28px, transparent 28px 36px, #000 36px 46px, transparent 46px 56px, #000 56px 66px, transparent 66px 74px, #000 74px 84px, transparent 84px 94px, #000 94px 104px, transparent 104px 112px, #000 112px 122px, transparent 122px);
-      background-blend-mode: multiply;
-      image-rendering: pixelated;
-      position: relative;
-    }
-
-    .qr::before,
-    .qr::after,
-    .qr span {
-      content: "";
-      position: absolute;
-      width: 42px;
-      height: 42px;
-      border: 8px solid #000;
-      background: #fff;
-      box-shadow: inset 0 0 0 9px #fff, inset 0 0 0 18px #000;
-    }
-
-    .qr::before { left: 0; top: 0; }
-    .qr::after { right: 0; top: 0; }
-    .qr span { left: 0; bottom: 0; }
-
-    .scan {
-      background: #050505;
-      color: #fff;
-      text-align: center;
-      font-size: 1.75rem;
-      padding: 11px 10px 13px;
-      position: relative;
-    }
-
-    .scan::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: -12px;
-      transform: translateX(-50%);
-      border-left: 16px solid transparent;
-      border-right: 16px solid transparent;
-      border-bottom: 13px solid #050505;
-    }
-
-    .payment {
-      margin-top: 72px;
-      text-align: center;
-      position: relative;
-    }
-
-    .payment-title {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      justify-content: center;
-      color: var(--gold-soft);
-      font-size: 1.35rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      margin-bottom: 28px;
-    }
-
-    .payment-title::before,
-    .payment-title::after {
-      content: "";
-      width: min(210px, 24vw);
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
-    }
-
-    .payments {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 34px;
-      flex-wrap: wrap;
-    }
-
-    .pay {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 900;
-      font-size: 1.7rem;
-    }
-
-    .divider {
-      width: 1px;
-      height: 44px;
-      background: rgba(202,164,88,.85);
-    }
-
-    .logo {
-      width: 54px;
-      height: 54px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      color: white;
-      font-weight: 950;
-      box-shadow: 0 10px 26px rgba(0,0,0,.4);
-    }
-
-    .dana { background: linear-gradient(145deg, #0086ff, #0d66da); }
-    .ovo { background: radial-gradient(circle, #8f55ff 0 34%, #6126c7 35% 100%); font-size: 2rem; }
-    .sea { background: linear-gradient(145deg, #ff7800, #ff4300); border-radius: 50%; }
-
-    .social {
-      margin-top: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      font-size: 1.32rem;
-      font-weight: 900;
-    }
-
-    .social-icon {
-      width: 34px;
-      height: 34px;
-      border: 3px solid #fff;
-      border-radius: 10px;
-      display: inline-grid;
-      place-items: center;
-      position: relative;
-    }
-
-    .social-icon::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      border: 3px solid #fff;
-      border-radius: 50%;
-    }
-
-    .social-icon::after {
-      content: "";
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      right: 6px;
-      top: 6px;
-      background: #fff;
-      border-radius: 50%;
-    }
-
-    @media (max-width: 820px) {
-      .page {
-        padding: 42px 24px 34px;
-      }
-
-      .content {
-        grid-template-columns: 1fr;
-        gap: 36px;
-      }
-
-      .features {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .wheel-zone {
-        min-height: 420px;
-      }
-
-      .qr-card {
-        right: 8px;
-        width: 150px;
-      }
-
-      .qr {
-        width: 108px;
-        height: 108px;
-      }
-
-      .scan {
-        font-size: 1.25rem;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .brand { font-size: 1.2rem; }
-      .hero-title { font-size: 4.6rem; }
-      .tagline { font-size: 1.22rem; }
-      .intro { font-size: 1.05rem; }
-      .features { grid-template-columns: 1fr; }
-      .feature { grid-template-columns: 64px 1fr; }
-      .icon { width: 52px; height: 52px; }
-      .wheel-zone { min-height: 360px; }
-      .wheel { width: min(330px, 92vw); }
-      .wheel::after { right: 54px; top: 154px; font-size: 1rem; }
-      .bolt { transform: translate(-50%, -50%) rotate(var(--a)) translateY(-43px); }
-      .payment { margin-top: 50px; }
-      .payment-title { gap: 12px; font-size: 1.05rem; }
-      .payments { gap: 18px; }
-      .pay { font-size: 1.25rem; }
-      .divider { display: none; }
-    }
-  </style>
+  <title>Ramadhan Easyshop — Katalog Velg RAYS TE37</title>
+  <meta name="description" content="Katalog jualan velg RAYS Volk Racing TE37 dari Ramadhan Easyshop. Harga Rp 15.000.000 / set, order via WhatsApp." />
+  <meta name="theme-color" content="#080806" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="page" aria-label="Promosi velg RAYS TE37">
-    <header>
-      <div class="brand">RAYS</div>
-      <h1 class="hero-title">TE37</h1>
-      <p class="tagline">Legendary Performance</p>
-      <div class="red-line"></div>
-      <p class="intro">The iconic TE37.<br />Built for performance.<br />Made to win.</p>
-    </header>
+  <div class="site-bg" aria-hidden="true"></div>
 
-    <section class="content">
-      <div class="features">
-        <article class="feature">
-          <div class="icon">🪶</div>
-          <div>
-            <h3>Lightweight<br />Forged</h3>
-            <p>Stronger yet lighter.</p>
-          </div>
-        </article>
+  <header class="header" id="top">
+    <a class="brand" href="#top" aria-label="Ramadhan Easyshop">
+      <span class="brand-mark">RE</span>
+      <span>
+        <strong>Ramadhan Easyshop</strong>
+        <small>Katalog Velg Premium</small>
+      </span>
+    </a>
 
-        <article class="feature">
-          <div class="icon">🛡️</div>
-          <div>
-            <h3>Maximum<br />Strength</h3>
-            <p>Built for high speed and extreme conditions.</p>
-          </div>
-        </article>
+    <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
 
-        <article class="feature">
-          <div class="icon">🏁</div>
-          <div>
-            <h3>Racing<br />Heritage</h3>
-            <p>Proven on track trusted on street.</p>
-          </div>
-        </article>
+    <nav class="nav" aria-label="Navigasi utama">
+      <a href="#produk">Produk</a>
+      <a href="#keunggulan">Keunggulan</a>
+      <a href="#spesifikasi">Spesifikasi</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#order">Order</a>
+    </nav>
+  </header>
 
-        <article class="feature">
-          <div class="icon">🇯🇵</div>
-          <div>
-            <h3>Made In<br />Japan</h3>
-            <p>Precision engineering you can trust.</p>
-          </div>
-        </article>
+  <main>
+    <section class="hero section" id="produk">
+      <div class="hero-backdrop" aria-hidden="true">
+        <img src="assets/hero-te37.webp" alt="" />
       </div>
 
-      <div class="wheel-zone">
-        <div class="wheel-shadow"></div>
-        <div class="wheel" role="img" aria-label="Ilustrasi velg TE37">
-          <i class="bolt"></i>
-          <i class="bolt"></i>
-          <i class="bolt"></i>
-          <i class="bolt"></i>
-          <i class="bolt"></i>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Katalog Velg Premium</span>
+          <h1>RAYS Volk Racing <span>TE37</span></h1>
+          <p>
+            Velg forged legendaris dengan karakter ringan, kuat, dan sporty.
+            Cocok untuk tampilan street performance, show car, hingga harian yang ingin terlihat lebih premium.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://wa.me/62823124224443?text=Halo%20Ramadhan%20Easyshop%2C%20saya%20tertarik%20dengan%20RAYS%20TE37%20harga%20Rp%2015.000.000%20%2F%20set.%20Bisa%20info%20stok%2C%20ukuran%2C%20dan%20PCD%3F" target="_blank" rel="noopener">
+              Order via WhatsApp
+            </a>
+            <a class="btn btn-ghost" href="#galeri">Lihat Galeri</a>
+          </div>
+
+          <div class="hero-stats" aria-label="Ringkasan produk">
+            <div>
+              <strong>Rp 15.000.000</strong>
+              <span>/ set</span>
+            </div>
+            <div>
+              <strong>1 Set</strong>
+              <span>Isi 4 velg</span>
+            </div>
+            <div>
+              <strong>Japan</strong>
+              <span>Racing style</span>
+            </div>
+          </div>
         </div>
 
-        <aside class="qr-card" aria-label="Kode QR untuk scan">
-          <div class="qr"><span></span></div>
-          <div class="scan">Scan Me</div>
+        <aside class="hero-card reveal">
+          <div class="poster-wrap">
+            <img src="assets/slide-01.webp" alt="Poster katalog RAYS TE37 dengan harga Rp 15.000.000 per set" />
+          </div>
+          <div class="card-bottom">
+            <div>
+              <span class="muted">Produk utama</span>
+              <strong>TE37 Forged Wheel</strong>
+            </div>
+            <span class="pill">Ready Consult</span>
+          </div>
         </aside>
       </div>
     </section>
 
-    <footer class="payment">
-      <h2 class="payment-title">Payment Options</h2>
-      <div class="payments" aria-label="Daftar metode pembayaran">
-        <div class="pay"><span class="logo dana">◒</span>DANA</div>
-        <div class="divider"></div>
-        <div class="pay"><span class="logo ovo">O</span>OVO</div>
-        <div class="divider"></div>
-        <div class="pay"><span class="logo sea">S</span>SeaBank</div>
+    <section class="floating-panel container reveal" aria-label="Deskripsi singkat">
+      <span class="chip">Racing Heritage</span>
+      <h2>Velg ikonik untuk street & performance.</h2>
+      <p>
+        RAYS TE37 dikenal dengan desain 6-spoke yang timeless, konstruksi forged yang ringan,
+        dan tampilan premium khas velg performa Jepang. Produk ini cocok untuk kamu yang ingin
+        upgrade style mobil tanpa kehilangan karakter sporty.
+      </p>
+      <div class="feature-row">
+        <span>Lightweight Forged</span>
+        <span>Maximum Strength</span>
+        <span>Made in Japan</span>
       </div>
-      <div class="social">
-        <span class="social-icon" aria-hidden="true"></span>
-        <span>@ramadhaneasy</span>
+    </section>
+
+    <section class="section" id="keunggulan">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Kenapa TE37?</span>
+          <h2>Keunggulan utama yang bikin tampil beda.</h2>
+          <p>Dirancang untuk gaya, performa, dan karakter modifikasi yang lebih matang.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="info-card reveal">
+            <div class="icon">✦</div>
+            <h3>Lightweight Forged</h3>
+            <p>Bobot lebih ringan membantu respons kendaraan terasa lebih lincah dan efisien.</p>
+          </article>
+          <article class="info-card reveal">
+            <div class="icon">◇</div>
+            <h3>Maximum Strength</h3>
+            <p>Konstruksi kuat untuk penggunaan street, high speed, dan kebutuhan modifikasi.</p>
+          </article>
+          <article class="info-card reveal">
+            <div class="icon">⚑</div>
+            <h3>Racing Heritage</h3>
+            <p>Desain legendaris yang terinspirasi dari dunia motorsport dan tetap relevan sampai sekarang.</p>
+          </article>
+          <article class="info-card reveal">
+            <div class="icon">◎</div>
+            <h3>Premium Finish</h3>
+            <p>Tampilan gunmetal yang elegan, modern, dan mudah dipadukan dengan banyak warna mobil.</p>
+          </article>
+        </div>
       </div>
-    </footer>
+    </section>
+
+    <section class="section split-section" id="spesifikasi">
+      <div class="container split-grid">
+        <div class="visual-card reveal">
+          <img src="assets/detail-te37.webp" alt="Detail produk velg RAYS TE37" />
+        </div>
+
+        <div class="spec-card reveal">
+          <span class="eyebrow">Spesifikasi</span>
+          <h2>Detail produk</h2>
+          <p class="spec-intro">
+            Spesifikasi berikut dibuat sebagai katalog umum. Ukuran ring, PCD, lebar, dan offset
+            sebaiknya dikonfirmasi dulu lewat WhatsApp agar cocok dengan mobil kamu.
+          </p>
+
+          <dl class="spec-list">
+            <div><dt>Material</dt><dd>Forged alloy</dd></div>
+            <div><dt>Desain</dt><dd>6-spoke iconic</dd></div>
+            <div><dt>Finishing</dt><dd>Gunmetal / Bronze / Black</dd></div>
+            <div><dt>Penggunaan</dt><dd>Street, show, performance</dd></div>
+            <div><dt>Asal</dt><dd>Japan style</dd></div>
+            <div><dt>Isi Paket</dt><dd>1 set isi 4 velg</dd></div>
+            <div><dt>Ketersediaan</dt><dd>Beragam ukuran & PCD</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="section price-section">
+      <div class="container price-card reveal">
+        <div>
+          <span class="eyebrow">Harga spesial</span>
+          <h2>Rp 15.000.000 <span>/ set</span></h2>
+          <p>
+            Harga untuk 1 set velg. Tanyakan stok, ukuran, PCD, dan estimasi pengiriman sebelum order.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="https://wa.me/62823124224443?text=Halo%20Ramadhan%20Easyshop%2C%20saya%20mau%20order%20RAYS%20TE37.%20Bisa%20dibantu%20cek%20stok%2C%20ukuran%2C%20dan%20PCD%3F" target="_blank" rel="noopener">
+          Order via WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="galeri">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Galeri Katalog</span>
+          <h2>Slide promosi siap dipakai.</h2>
+          <p>Semua asset visual disusun dalam gaya dark premium agar konsisten untuk katalog dan promosi.</p>
+        </div>
+
+        <div class="gallery">
+          <button class="gallery-item reveal" data-img="assets/slide-01.webp" aria-label="Buka slide 1">
+            <img src="assets/slide-01.webp" alt="Slide 1 RAYS TE37 Legendary Performance" />
+          </button>
+          <button class="gallery-item reveal" data-img="assets/slide-02.webp" aria-label="Buka slide 2">
+            <img src="assets/slide-02.webp" alt="Slide 2 Tentang TE37" />
+          </button>
+          <button class="gallery-item reveal" data-img="assets/slide-03.webp" aria-label="Buka slide 3">
+            <img src="assets/slide-03.webp" alt="Slide 3 Keunggulan utama TE37" />
+          </button>
+          <button class="gallery-item reveal" data-img="assets/slide-04.webp" aria-label="Buka slide 4">
+            <img src="assets/slide-04.webp" alt="Slide 4 Spesifikasi umum TE37" />
+          </button>
+          <button class="gallery-item reveal" data-img="assets/slide-05.webp" aria-label="Buka slide 5">
+            <img src="assets/slide-05.webp" alt="Slide 5 Detail produk TE37" />
+          </button>
+          <button class="gallery-item reveal" data-img="assets/slide-06.webp" aria-label="Buka slide 6">
+            <img src="assets/slide-06.webp" alt="Slide 6 Harga dan benefit TE37" />
+          </button>
+          <button class="gallery-item reveal" data-img="assets/slide-07.webp" aria-label="Buka slide 7">
+            <img src="assets/slide-07.webp" alt="Slide 7 Cara order Ramadhan Easyshop" />
+          </button>
+          <button class="gallery-item reveal" data-img="assets/slide-08.webp" aria-label="Buka slide 8">
+            <img src="assets/slide-08.webp" alt="Slide 8 Closing order TE37" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section order-section" id="order">
+      <div class="container order-grid">
+        <div class="order-copy reveal">
+          <span class="eyebrow">Cara Order</span>
+          <h2>Order cepat lewat WhatsApp atau scan QR.</h2>
+          <p>
+            Klik tombol WhatsApp untuk konsultasi ukuran, PCD, stok, dan pengiriman. QR code juga disediakan
+            untuk pembeli yang ingin akses langsung dari perangkat lain.
+          </p>
+
+          <ol class="steps">
+            <li><strong>Contact WA</strong><span>Hubungi 0823124224443 atau klik tombol order.</span></li>
+            <li><strong>Tanyakan ukuran</strong><span>Konsultasikan ring, PCD, lebar, dan offset.</span></li>
+            <li><strong>Konfirmasi</strong><span>Lanjut pembayaran via Dana, OVO, atau SeaBank.</span></li>
+          </ol>
+
+          <div class="order-actions">
+            <a class="btn btn-primary" href="https://wa.me/62823124224443?text=Halo%20Ramadhan%20Easyshop%2C%20saya%20tertarik%20dengan%20RAYS%20TE37%20harga%20Rp%2015.000.000%20%2F%20set.%20Bisa%20info%20stok%2C%20ukuran%2C%20dan%20PCD%3F" target="_blank" rel="noopener">
+              Order via WhatsApp
+            </a>
+            <button class="btn btn-ghost" type="button" id="copyPhone">Copy Nomor WA</button>
+          </div>
+        </div>
+
+        <aside class="qr-card reveal">
+          <div class="qr-frame">
+            <img src="assets/qrcode-order.png" alt="QR code order Ramadhan Easyshop" />
+          </div>
+          <h3>Scan untuk order</h3>
+          <p>Pastikan QR mengarah ke halaman order atau WhatsApp yang aktif.</p>
+          <div class="payment-tags">
+            <span>Dana</span><span>OVO</span><span>SeaBank</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section faq-section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Catatan Pembelian</span>
+          <h2>Sebelum checkout, cek dulu kecocokan velg.</h2>
+        </div>
+
+        <div class="faq-grid">
+          <details class="faq reveal" open>
+            <summary>Apakah harga sudah untuk 1 set?</summary>
+            <p>Ya, harga katalog adalah Rp 15.000.000 / set. Isi set mengikuti informasi penjual, yaitu 4 velg.</p>
+          </details>
+          <details class="faq reveal">
+            <summary>Apakah bisa langsung cocok di semua mobil?</summary>
+            <p>Tidak selalu. Ukuran ring, PCD, lebar, dan offset perlu disesuaikan dengan mobil. Konsultasikan dulu lewat WhatsApp.</p>
+          </details>
+          <details class="faq reveal">
+            <summary>Metode pembayaran apa saja?</summary>
+            <p>Pembayaran yang ditampilkan: Dana, OVO, dan SeaBank. Konfirmasi admin sebelum transfer.</p>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Ramadhan Easyshop</strong>
+        <p>Katalog velg premium — RAYS TE37.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://wa.me/62823124224443" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="#top">Kembali ke atas</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="Tutup preview">×</button>
+    <img src="" alt="Preview slide katalog" />
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Nomor WA disalin.</div>
+
+  <script src="script.js"></script>
 </body>
 </html>
